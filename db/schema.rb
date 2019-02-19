@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190217135559) do
+ActiveRecord::Schema.define(version: 20190219094624) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -28,4 +31,41 @@ ActiveRecord::Schema.define(version: 20190217135559) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers_products", id: false, force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "product_id", null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.text "email"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playground", primary_key: "equip_id", id: :serial, force: :cascade do |t|
+    t.string "type", limit: 50, null: false
+    t.string "color", limit: 25, null: false
+    t.string "location", limit: 25
+    t.date "install_date"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "price"
+  end
+
+  create_table "second_distributors", force: :cascade do |t|
+    t.string "zipcode"
+  end
+
+  add_foreign_key "emails", "customers"
 end
