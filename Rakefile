@@ -4,3 +4,8 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+desc "One line task description"
+task :some_task do
+  p "this is take task execution block"
+end

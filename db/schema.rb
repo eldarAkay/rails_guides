@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190219094624) do
+ActiveRecord::Schema.define(version: 20190222081526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20190219094624) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gender"
+    t.text "email"
   end
 
   create_table "customers_products", id: false, force: :cascade do |t|
@@ -47,6 +49,30 @@ ActiveRecord::Schema.define(version: 20190219094624) do
     t.bigint "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.decimal "total_value"
+    t.decimal "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "subdomain"
+    t.text "phone_number"
+    t.integer "permanent"
+    t.text "job_title"
+    t.integer "expected_salary"
   end
 
   create_table "playground", primary_key: "equip_id", id: :serial, force: :cascade do |t|
