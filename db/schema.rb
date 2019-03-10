@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190306085944) do
+ActiveRecord::Schema.define(version: 20190310050252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,20 @@ ActiveRecord::Schema.define(version: 20190306085944) do
     t.string "zipcode"
   end
 
+  create_table "suggestions", force: :cascade do |t|
+    t.string "text"
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_suggestions_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -180,4 +194,5 @@ ActiveRecord::Schema.define(version: 20190306085944) do
   end
 
   add_foreign_key "emails", "customers"
+  add_foreign_key "suggestions", "topics"
 end

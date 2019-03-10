@@ -1,0 +1,20 @@
+<%= link_to 'Suggest!', new_suggestion_path %>
+<table>
+  <tr>
+    <th style="padding-right: 20px">Title</th>
+    <th>Text</th>
+    <th></th>
+  </tr>
+  <% @suggestions.each do |suggestion| %>
+    <tr>
+      <td><%= suggestion.topic.name %></td>
+      <td><%= suggestion.text %></td>
+      <td><%= link_to 'Show', suggestion_path(suggestion) %></td>
+      <td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
+      <td><%= link_to 'Destroy', suggestion_path(suggestion),
+                      method: :delete,
+                      data: {confirm: 'Are you sure?'} %>
+      </td>
+    </tr>
+  <% end %>
+</table>
